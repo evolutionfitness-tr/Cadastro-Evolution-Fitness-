@@ -33,8 +33,6 @@
   .form-title{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;letter-spacing:0.04em;color:var(--white);line-height:1.15;margin-bottom:14px}
   .form-desc{font-size:0.78rem;font-weight:300;color:var(--muted-hi);line-height:1.7;max-width:480px;border-left:2px solid var(--border-hi);padding-left:16px}
   .form-section{margin-bottom:40px;animation:fadeUp 0.5s ease both}
-  .form-section:nth-child(2){animation-delay:0.08s}
-  .form-section:nth-child(3){animation-delay:0.16s}
   .section-head{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:14px;border-bottom:1px solid var(--border)}
   .section-num{width:24px;height:24px;border:1px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:0.62rem;font-weight:700;color:var(--red);flex-shrink:0}
   .section-title{font-size:0.65rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver)}
@@ -56,6 +54,14 @@
   .checkbox-item:hover{border-color:var(--border-hi);background:#1a1a1a}
   .checkbox-item input[type="checkbox"]{width:14px;height:14px;accent-color:var(--red);cursor:pointer;flex-shrink:0}
   .checkbox-item:has(input:checked){border-color:var(--red);background:var(--red-dim);color:var(--white)}
+
+  /* MENOR DE IDADE TOGGLE */
+  .menor-toggle{display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--border);border-radius:2px;background:var(--surface);cursor:pointer;margin-bottom:0;transition:border-color 0.2s,background 0.2s}
+  .menor-toggle:hover{border-color:var(--border-hi);background:#1a1a1a}
+  .menor-toggle:has(input:checked){border-color:var(--red);background:var(--red-dim)}
+  .menor-toggle input[type="checkbox"]{width:16px;height:16px;accent-color:var(--red);cursor:pointer;flex-shrink:0}
+  .menor-toggle span{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver-hi)}
+
   .form-footer{margin-top:48px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:32px;border-top:1px solid var(--border);animation:fadeUp 0.5s 0.24s ease both}
   .submit-note{font-size:0.65rem;font-weight:300;color:var(--muted);line-height:1.6;max-width:280px}
   .btn-submit{flex-shrink:0;padding:14px 40px;background:var(--red);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:background 0.2s,transform 0.15s,box-shadow 0.2s;box-shadow:0 4px 24px rgba(196,26,26,0.25)}
@@ -70,8 +76,10 @@
   .success-eyebrow{font-size:0.6rem;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
   .success-title{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--white);letter-spacing:0.04em;margin-bottom:16px}
   .success-text{font-size:0.78rem;font-weight:300;color:var(--muted-hi);line-height:1.7;max-width:360px;margin:0 auto 32px}
-  .btn-whatsapp{display:inline-block;margin-bottom:12px;padding:14px 32px;background:var(--red);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;border:none;border-radius:2px;transition:all 0.2s;text-decoration:none}
+  .btn-whatsapp{display:inline-block;margin-bottom:12px;padding:14px 32px;background:var(--red);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;border:none;border-radius:2px;text-decoration:none;transition:background 0.2s}
   .btn-whatsapp:hover{background:#d42020}
+  .btn-novo{display:inline-block;padding:12px 32px;border:1px solid var(--border-hi);color:var(--silver);font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;background:transparent;border-radius:2px;transition:all 0.2s}
+  .btn-novo:hover{border-color:var(--red);color:var(--white);background:var(--red-dim)}
   footer{border-top:1px solid var(--border);padding:0 40px}
   .footer-inner{max-width:680px;margin:0 auto;padding:20px 0;display:flex;align-items:center;justify-content:space-between}
   .footer-copy{font-size:0.6rem;font-weight:500;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase}
@@ -108,12 +116,14 @@
   <main>
     <div class="form-wrap">
       <div id="formMain">
+
         <div class="form-header">
           <p class="form-eyebrow">Novo Aluno</p>
           <h1 class="form-title">Ficha de<br>Matrícula</h1>
           <p class="form-desc">Preencha todos os campos com atenção. Após a confirmação, seus dados serão encaminhados diretamente para nossa equipe via WhatsApp.</p>
         </div>
 
+        <!-- 01 DADOS PESSOAIS -->
         <div class="form-section">
           <div class="section-head"><div class="section-num">01</div><div class="section-title">Dados Pessoais</div></div>
           <div class="fields">
@@ -141,6 +151,7 @@
           </div>
         </div>
 
+        <!-- 02 ENDEREÇO -->
         <div class="form-section">
           <div class="section-head"><div class="section-num">02</div><div class="section-title">Endereço</div></div>
           <div class="fields">
@@ -173,6 +184,7 @@
           </div>
         </div>
 
+        <!-- 03 CONTATO E PLANO -->
         <div class="form-section">
           <div class="section-head"><div class="section-num">03</div><div class="section-title">Contato e Plano</div></div>
           <div class="fields">
@@ -190,22 +202,71 @@
           </div>
         </div>
 
+        <!-- TOGGLE MENOR DE IDADE -->
+        <div class="form-section" style="margin-bottom:24px">
+          <label class="menor-toggle">
+            <input type="checkbox" id="ehMenor" onchange="toggleResponsavel(this)">
+            <span>Aluno menor de idade — preencher dados do responsável</span>
+          </label>
+        </div>
+
+        <!-- 04 RESPONSÁVEL (oculto por padrão) -->
+        <div class="form-section" id="secaoResponsavel" style="display:none">
+          <div class="section-head"><div class="section-num">04</div><div class="section-title">Dados do Responsável</div></div>
+          <div class="fields">
+            <div class="field">
+              <label for="resp_nome">Nome Completo do Responsável</label>
+              <input type="text" id="resp_nome" placeholder="Nome e sobrenome">
+            </div>
+            <div class="fields col-2">
+              <div class="field">
+                <label for="resp_cpf">CPF do Responsável</label>
+                <input type="text" id="resp_cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="resp_parentesco">Parentesco</label>
+                <div class="select-wrap">
+                  <select id="resp_parentesco">
+                    <option value="">Selecione</option>
+                    <option>Pai</option>
+                    <option>Mãe</option>
+                    <option>Avô</option>
+                    <option>Avó</option>
+                    <option>Tio</option>
+                    <option>Tia</option>
+                    <option>Responsável Legal</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label for="resp_celular">Celular do Responsável</label>
+              <div class="phone-wrap">
+                <span class="phone-prefix">+55</span>
+                <input type="tel" id="resp_celular" placeholder="(00) 00000-0000" maxlength="15" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="form-footer">
           <p class="submit-note">Ao enviar, você concorda que seus dados sejam utilizados exclusivamente para fins de matrícula na Evolution Fitness.</p>
           <button class="btn-submit" id="btnSubmit" onclick="enviarCadastro()">Finalizar Matrícula no WhatsApp</button>
         </div>
+
       </div>
 
       <div class="success-wrap" id="successWrap">
         <div class="success-icon-wrap"><div class="success-check"></div></div>
         <p class="success-eyebrow">Cadastro Confirmado</p>
         <h2 class="success-title">Ficha enviada<br>com sucesso</h2>
-        <p class="success-text">Seu cadastro foi salvo com sucesso! Clique abaixo para enviar pelo WhatsApp ou faça um novo cadastro.</p>
+        <p class="success-text">Cadastro salvo! Clique abaixo caso o WhatsApp não tenha aberto automaticamente.</p>
         <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
           <a id="btnWhatsApp" href="#" class="btn-whatsapp" target="_blank">Enviar pelo WhatsApp</a>
-          <button style="display:inline-block;padding:12px 32px;border:1px solid var(--border-hi);color:var(--silver);font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;background:transparent;border-radius:2px" onclick="novoCadastro()">Novo Cadastro</button>
+          <button class="btn-novo" onclick="novoCadastro()">Novo Cadastro</button>
         </div>
       </div>
+
     </div>
   </main>
 
@@ -227,18 +288,33 @@
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4aG9wb3dpb3d1amVic2N2cmt3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NzYyMTAsImV4cCI6MjA4OTQ1MjIxMH0.mWlXrr5TYzFo3S8mCJw4cps-IVz9CdHpyfD-O7A5-us'
   );
 
+  // Mostrar/ocultar seção responsável
+  window.toggleResponsavel = function(cb) {
+    document.getElementById('secaoResponsavel').style.display = cb.checked ? 'block' : 'none';
+  };
+
   // Máscaras
-  document.getElementById('cpf').addEventListener('input', e => {
-    let v = e.target.value.replace(/\D/g,'').slice(0,11);
-    v = v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
-    e.target.value = v;
-  });
-  document.getElementById('whatsapp').addEventListener('input', e => {
-    let v = e.target.value.replace(/\D/g,'').slice(0,11);
-    if(v.length>=7) v=v.replace(/(\d{2})(\d{5})(\d{0,4})/,'($1) $2-$3');
-    else if(v.length>=3) v=v.replace(/(\d{2})(\d{0,5})/,'($1) $2');
-    e.target.value = v;
-  });
+  function maskCPF(el) {
+    el.addEventListener('input', e => {
+      let v = e.target.value.replace(/\D/g,'').slice(0,11);
+      v = v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+      e.target.value = v;
+    });
+  }
+  function maskPhone(el) {
+    el.addEventListener('input', e => {
+      let v = e.target.value.replace(/\D/g,'').slice(0,11);
+      if(v.length>=7) v=v.replace(/(\d{2})(\d{5})(\d{0,4})/,'($1) $2-$3');
+      else if(v.length>=3) v=v.replace(/(\d{2})(\d{0,5})/,'($1) $2');
+      e.target.value = v;
+    });
+  }
+
+  maskCPF(document.getElementById('cpf'));
+  maskCPF(document.getElementById('resp_cpf'));
+  maskPhone(document.getElementById('whatsapp'));
+  maskPhone(document.getElementById('resp_celular'));
+
   document.getElementById('cep').addEventListener('input', e => {
     let v = e.target.value.replace(/\D/g,'').slice(0,8);
     e.target.value = v.replace(/(\d{5})(\d)/,'$1-$2');
@@ -265,6 +341,11 @@
     const cep       = document.getElementById('cep').value.trim();
     const plano     = Array.from(document.querySelectorAll('.checkboxes input:checked'))
                        .map(cb => cb.value).join(', ') || 'Nao informado';
+    const ehMenor     = document.getElementById('ehMenor').checked;
+    const resp_nome   = document.getElementById('resp_nome').value.trim();
+    const resp_cpf    = document.getElementById('resp_cpf').value.trim();
+    const resp_cel    = document.getElementById('resp_celular').value.trim();
+    const resp_parent = document.getElementById('resp_parentesco').value;
 
     if (!nome || !cpf || !nasc || !wpp) {
       alert('Preencha todos os campos obrigatórios!');
@@ -278,21 +359,34 @@
     const [y, m, d] = nasc.split('-');
     const nascFmt = `${d}/${m}/${y}`;
 
-    // 1. SALVAR NO SUPABASE PRIMEIRO
+    // SALVAR NO SUPABASE
     const { error } = await sb.from('alunos').insert([{
       nome, cpf, nascimento: nascFmt, whatsapp: wpp,
       email: email || null, instagram: instagram || null,
-      rua, bairro, cidade, estado, cep, plano
+      rua, bairro, cidade, estado, cep, plano,
+      menor_de_idade: ehMenor,
+      resp_nome: ehMenor ? resp_nome || null : null,
+      resp_cpf: ehMenor ? resp_cpf || null : null,
+      resp_celular: ehMenor ? resp_cel || null : null,
+      resp_parentesco: ehMenor ? resp_parent || null : null
     }]);
 
     if (error) {
       console.error('Erro Supabase:', error);
       showToast('Aviso: erro ao salvar no banco.');
-    } else {
-      console.log('Salvo no Supabase com sucesso!');
     }
 
-    // 2. MONTAR MENSAGEM
+    // MONTAR MENSAGEM WHATSAPP
+    const responsavelInfo = ehMenor ? `
+
+——————————————————————
+RESPONSAVEL
+——————————————————————
+Nome: ${resp_nome || 'Nao informado'}
+CPF: ${resp_cpf || 'Nao informado'}
+Celular: ${resp_cel || 'Nao informado'}
+Parentesco: ${resp_parent || 'Nao informado'}` : '';
+
     const msg =
 `EVOLUTION FITNESS — FICHA DE MATRICULA
 
@@ -317,14 +411,12 @@ CEP: ${cep}
 ——————————————————————
 PLANO ESCOLHIDO
 ——————————————————————
-${plano}
+${plano}${responsavelInfo}
 ——————————————————————
 Cadastro realizado pelo formulario digital.`;
 
-    // 3. MONTAR LINK DO WHATSAPP
     const waUrl = `https://wa.me/5524981433386?text=${encodeURIComponent(msg)}`;
 
-    // 4. MOSTRAR TELA DE SUCESSO COM BOTÃO
     document.getElementById('formMain').style.display = 'none';
     document.getElementById('successWrap').classList.add('show');
     document.getElementById('btnWhatsApp').href = waUrl;
@@ -332,7 +424,6 @@ Cadastro realizado pelo formulario digital.`;
     btn.disabled = false;
     btn.textContent = 'Finalizar Matrícula no WhatsApp';
 
-    // 5. TENTAR ABRIR AUTOMATICAMENTE
     window.open(waUrl, '_blank');
   };
 
@@ -342,6 +433,8 @@ Cadastro realizado pelo formulario digital.`;
     document.querySelectorAll('input[type="text"],input[type="tel"],input[type="email"],input[type="date"]').forEach(i => i.value = '');
     document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
     document.getElementById('estado').value = '';
+    document.getElementById('resp_parentesco').value = '';
+    document.getElementById('secaoResponsavel').style.display = 'none';
     window.scrollTo({top:0,behavior:'smooth'});
   };
 </script>
