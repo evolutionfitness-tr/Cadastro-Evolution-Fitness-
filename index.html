@@ -6,12 +6,7 @@
 <title>Evolution Fitness — Ficha de Matrícula</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg:#0a0a0a; --surface:#111111; --border:#252525; --border-hi:#333333;
-    --red:#c41a1a; --red-dim:rgba(196,26,26,0.18); --red-glow:rgba(196,26,26,0.12);
-    --silver:#a8a8b0; --silver-hi:#d8d8e0; --white:#f2f2f4;
-    --muted:#888888; --muted-hi:#AAAAAA;
-  }
+  :root{--bg:#0a0a0a;--surface:#111111;--border:#252525;--border-hi:#333333;--red:#c41a1a;--red-dim:rgba(196,26,26,0.18);--red-glow:rgba(196,26,26,0.12);--silver:#a8a8b0;--silver-hi:#d8d8e0;--white:#f2f2f4;--muted:#888888;--muted-hi:#AAAAAA}
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--silver-hi);font-family:'Montserrat',sans-serif;font-weight:400;min-height:100vh;-webkit-font-smoothing:antialiased}
@@ -28,48 +23,92 @@
   .header-tag{font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-align:right;line-height:1.6}
   main{padding:56px 40px 80px}
   .form-wrap{max-width:680px;margin:0 auto}
+
+  /* ── STEPS BAR ── */
+  .steps-bar{display:flex;align-items:flex-start;margin-bottom:48px}
+  .step-item{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0}
+  .step-dot{width:28px;height:28px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.58rem;font-weight:700;color:var(--muted);background:var(--surface);transition:all 0.3s}
+  .step-dot.active{border-color:var(--red);color:var(--red);background:var(--red-dim)}
+  .step-dot.done{border-color:var(--red);background:var(--red);color:#fff}
+  .step-lbl{font-size:0.5rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+  .step-lbl.active,.step-lbl.done{color:var(--red)}
+  .step-conn{flex:1;height:1px;background:var(--border);margin:14px 6px 0;transition:background 0.3s}
+  .step-conn.done{background:var(--red)}
+
+  /* ── FORM HEADER ── */
   .form-header{margin-bottom:48px;animation:fadeUp 0.5s ease both}
   .form-eyebrow{font-size:0.62rem;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
   .form-title{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;letter-spacing:0.04em;color:var(--white);line-height:1.15;margin-bottom:14px}
   .form-desc{font-size:0.78rem;font-weight:300;color:var(--muted-hi);line-height:1.7;max-width:480px;border-left:2px solid var(--border-hi);padding-left:16px}
+
+  /* ── SECTIONS ── */
   .form-section{margin-bottom:40px;animation:fadeUp 0.5s ease both}
   .section-head{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:14px;border-bottom:1px solid var(--border)}
   .section-num{width:24px;height:24px;border:1px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:0.62rem;font-weight:700;color:var(--red);flex-shrink:0}
   .section-title{font-size:0.65rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver)}
+  .sub-head{font-size:0.6rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted-hi);margin:28px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+
+  /* ── FIELDS ── */
   .fields{display:grid;gap:24px}
   .col-2{grid-template-columns:1fr 1fr}
   .field{display:flex;flex-direction:column;gap:8px}
   .field label{font-size:0.6rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted-hi);transition:color 0.2s}
   .field:focus-within label{color:var(--red)}
-  .field input,.field select{background:var(--surface);border:1px solid var(--border);border-bottom:2px solid var(--border-hi);border-radius:2px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:0.85rem;font-weight:400;padding:12px 14px;outline:none;transition:border-color 0.2s,background 0.2s,box-shadow 0.2s;width:100%;-webkit-appearance:none}
-  .field input::placeholder{color:var(--muted);font-weight:300}
-  .field input:focus,.field select:focus{background:#1a1a1a;border-color:var(--border-hi);border-bottom-color:var(--red);box-shadow:0 4px 20px var(--red-glow)}
+  .field input:not([type="checkbox"]):not([type="radio"]),.field select,.field textarea{background:var(--surface);border:1px solid var(--border);border-bottom:2px solid var(--border-hi);border-radius:2px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:0.85rem;font-weight:400;padding:12px 14px;outline:none;transition:border-color 0.2s,background 0.2s,box-shadow 0.2s;width:100%;-webkit-appearance:none}
+  .field textarea{resize:vertical;min-height:80px;line-height:1.5}
+  .field input:not([type="checkbox"]):not([type="radio"])::placeholder,.field textarea::placeholder{color:var(--muted);font-weight:300}
+  .field input:not([type="checkbox"]):not([type="radio"]):focus,.field select:focus,.field textarea:focus{background:#1a1a1a;border-color:var(--border-hi);border-bottom-color:var(--red);box-shadow:0 4px 20px var(--red-glow)}
+  .field input[type="checkbox"],.field input[type="radio"]{all:revert;accent-color:var(--red);cursor:pointer}
   .select-wrap{position:relative}
   .select-wrap::after{content:'';position:absolute;right:14px;top:46%;width:7px;height:7px;border-right:1.5px solid var(--muted-hi);border-bottom:1.5px solid var(--muted-hi);transform:translateY(-50%) rotate(45deg);pointer-events:none}
   .phone-wrap{position:relative}
   .phone-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:0.75rem;font-weight:600;color:var(--muted-hi);pointer-events:none}
   .phone-wrap input{padding-left:48px}
+
+  /* ── CHECKBOXES / RADIOS ── */
   .checkboxes{display:flex;flex-wrap:wrap;gap:10px;padding:4px 0}
   .checkbox-item{display:flex;align-items:center;gap:8px;font-size:0.75rem;font-weight:500;color:var(--silver-hi);cursor:pointer;padding:8px 14px;border:1px solid var(--border);border-radius:2px;background:var(--surface);transition:border-color 0.2s,background 0.2s,color 0.2s}
   .checkbox-item:hover{border-color:var(--border-hi);background:#1a1a1a}
   .checkbox-item input[type="checkbox"]{width:14px;height:14px;accent-color:var(--red);cursor:pointer;flex-shrink:0}
   .checkbox-item:has(input:checked){border-color:var(--red);background:var(--red-dim);color:var(--white)}
+  .radio-group{display:flex;gap:10px;flex-wrap:wrap}
+  .radio-label{display:flex;align-items:center;gap:8px;cursor:pointer;padding:9px 18px;border:1px solid var(--border);border-radius:2px;background:var(--surface);transition:all 0.2s;font-size:0.75rem;font-weight:600;color:var(--silver-hi);letter-spacing:0.05em}
+  .radio-label input{accent-color:var(--red);width:14px;height:14px;flex-shrink:0;cursor:pointer}
+  .radio-label:has(input:checked){border-color:var(--red);background:var(--red-dim);color:var(--white)}
 
-  /* MENOR DE IDADE TOGGLE */
-  .menor-toggle{display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--border);border-radius:2px;background:var(--surface);cursor:pointer;margin-bottom:0;transition:border-color 0.2s,background 0.2s}
+  /* ── MENOR DE IDADE ── */
+  .menor-toggle{display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--border);border-radius:2px;background:var(--surface);cursor:pointer;transition:border-color 0.2s,background 0.2s;width:100%}
   .menor-toggle:hover{border-color:var(--border-hi);background:#1a1a1a}
   .menor-toggle:has(input:checked){border-color:var(--red);background:var(--red-dim)}
   .menor-toggle input[type="checkbox"]{width:16px;height:16px;accent-color:var(--red);cursor:pointer;flex-shrink:0}
   .menor-toggle span{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver-hi)}
 
-  .form-footer{margin-top:48px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:32px;border-top:1px solid var(--border);animation:fadeUp 0.5s 0.24s ease both}
-  .submit-note{font-size:0.65rem;font-weight:300;color:var(--muted);line-height:1.6;max-width:280px}
-  .btn-submit{flex-shrink:0;padding:14px 40px;background:var(--red);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:background 0.2s,transform 0.15s,box-shadow 0.2s;box-shadow:0 4px 24px rgba(196,26,26,0.25)}
-  .btn-submit:hover{background:#d42020;transform:translateY(-1px)}
-  .btn-submit:active{transform:scale(0.98)}
-  .btn-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
-  .success-wrap{display:none;padding:80px 0;text-align:center;animation:fadeUp 0.5s ease both}
-  .success-wrap.show{display:block}
+  /* ── PAR-Q ── */
+  .parq-item{padding:20px 0;border-bottom:1px solid var(--border)}
+  .parq-item:last-of-type{border-bottom:none}
+  .parq-num{font-size:0.58rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+  .parq-text{font-size:0.82rem;color:var(--silver-hi);line-height:1.6;margin-bottom:12px;font-weight:300}
+  .parq-obs{display:none;margin-top:12px}
+  .parq-obs.show{display:block}
+
+  /* ── DECLARAÇÃO ── */
+  .decl-label{display:flex;align-items:flex-start;gap:12px;padding:16px;border:1px solid var(--border);border-radius:2px;background:var(--surface);cursor:pointer;transition:all 0.2s;margin-top:24px}
+  .decl-label input{accent-color:var(--red);width:16px;height:16px;flex-shrink:0;cursor:pointer;margin-top:2px}
+  .decl-label:has(input:checked){border-color:var(--red);background:var(--red-dim)}
+  .decl-text{font-size:0.72rem;font-weight:400;color:var(--muted-hi);line-height:1.6}
+
+  /* ── NAVIGATION ── */
+  .step-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:48px;padding-top:32px;border-top:1px solid var(--border)}
+  .step-note{font-size:0.65rem;font-weight:300;color:var(--muted);line-height:1.6;max-width:280px}
+  .btn-next{flex-shrink:0;padding:14px 40px;background:var(--red);color:#fff;font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:background 0.2s,transform 0.15s,box-shadow 0.2s;box-shadow:0 4px 24px rgba(196,26,26,0.25)}
+  .btn-next:hover{background:#d42020;transform:translateY(-1px)}
+  .btn-next:active{transform:scale(0.98)}
+  .btn-next:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+  .btn-prev{flex-shrink:0;padding:14px 32px;background:transparent;color:var(--silver);font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;border:1px solid var(--border-hi);border-radius:2px;cursor:pointer;transition:all 0.2s}
+  .btn-prev:hover{border-color:var(--red);color:var(--white)}
+
+  /* ── SUCCESS ── */
+  .success-wrap{padding:80px 0;text-align:center;animation:fadeUp 0.5s ease both}
   .success-icon-wrap{width:64px;height:64px;border:1px solid var(--red);margin:0 auto 28px;display:flex;align-items:center;justify-content:center;position:relative}
   .success-icon-wrap::before{content:'';position:absolute;inset:-4px;border:1px solid var(--border)}
   .success-check{width:20px;height:20px;border-right:2px solid var(--red);border-bottom:2px solid var(--red);transform:rotate(45deg) translate(-2px,-4px)}
@@ -80,6 +119,8 @@
   .btn-whatsapp:hover{background:#d42020}
   .btn-novo{display:inline-block;padding:12px 32px;border:1px solid var(--border-hi);color:var(--silver);font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;background:transparent;border-radius:2px;transition:all 0.2s}
   .btn-novo:hover{border-color:var(--red);color:var(--white);background:var(--red-dim)}
+
+  /* ── MISC ── */
   footer{border-top:1px solid var(--border);padding:0 40px}
   .footer-inner{max-width:680px;margin:0 auto;padding:20px 0;display:flex;align-items:center;justify-content:space-between}
   .footer-copy{font-size:0.6rem;font-weight:500;letter-spacing:0.15em;color:var(--muted);text-transform:uppercase}
@@ -91,15 +132,18 @@
   @media(max-width:600px){
     header,main,footer{padding-left:20px;padding-right:20px}
     .col-2{grid-template-columns:1fr}
-    .form-footer{flex-direction:column;align-items:stretch}
-    .btn-submit{text-align:center}
+    .step-nav{flex-direction:column;align-items:stretch}
+    .btn-next,.btn-prev{text-align:center}
     .form-title{font-size:1.9rem}
     .header-tag{display:none}
+    .step-lbl{display:none}
   }
 </style>
 </head>
 <body>
 <div class="page">
+
+  <!-- HEADER -->
   <header>
     <div class="header-inner">
       <div class="brand">
@@ -115,12 +159,38 @@
 
   <main>
     <div class="form-wrap">
-      <div id="formMain">
 
+      <!-- PROGRESS BAR -->
+      <div class="steps-bar" id="stepsBar">
+        <div class="step-item">
+          <div class="step-dot active" id="sd1">01</div>
+          <span class="step-lbl active" id="sl1">Cadastro</span>
+        </div>
+        <div class="step-conn" id="sc1"></div>
+        <div class="step-item">
+          <div class="step-dot" id="sd2">02</div>
+          <span class="step-lbl" id="sl2">Par-Q</span>
+        </div>
+        <div class="step-conn" id="sc2"></div>
+        <div class="step-item">
+          <div class="step-dot" id="sd3">03</div>
+          <span class="step-lbl" id="sl3">Anamnese</span>
+        </div>
+        <div class="step-conn" id="sc3"></div>
+        <div class="step-item">
+          <div class="step-dot" id="sd4">04</div>
+          <span class="step-lbl" id="sl4">Concluído</span>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- STEP 1 — CADASTRO                         -->
+      <!-- ══════════════════════════════════════════ -->
+      <div id="step1">
         <div class="form-header">
-          <p class="form-eyebrow">Novo Aluno</p>
+          <p class="form-eyebrow">Etapa 1 de 3</p>
           <h1 class="form-title">Ficha de<br>Matrícula</h1>
-          <p class="form-desc">Preencha todos os campos com atenção. Após a confirmação, seus dados serão encaminhados diretamente para nossa equipe via WhatsApp.</p>
+          <p class="form-desc">Preencha todos os campos com atenção. Suas informações serão armazenadas com segurança.</p>
         </div>
 
         <!-- 01 DADOS PESSOAIS -->
@@ -202,7 +272,7 @@
           </div>
         </div>
 
-        <!-- TOGGLE MENOR DE IDADE -->
+        <!-- MENOR DE IDADE -->
         <div class="form-section" style="margin-bottom:24px">
           <label class="menor-toggle">
             <input type="checkbox" id="ehMenor" onchange="toggleResponsavel(this)">
@@ -210,7 +280,7 @@
           </label>
         </div>
 
-        <!-- 04 RESPONSÁVEL (oculto por padrão) -->
+        <!-- 04 RESPONSÁVEL -->
         <div class="form-section" id="secaoResponsavel" style="display:none">
           <div class="section-head"><div class="section-num">04</div><div class="section-title">Dados do Responsável</div></div>
           <div class="fields">
@@ -220,50 +290,352 @@
             </div>
             <div class="fields col-2">
               <div class="field">
-                <label for="resp_cpf">CPF do Responsável</label>
-                <input type="text" id="resp_cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric">
+                <label for="resp_idade">Idade do Responsável</label>
+                <input type="number" id="resp_idade" placeholder="Ex: 35" min="18" max="99">
               </div>
               <div class="field">
                 <label for="resp_parentesco">Parentesco</label>
                 <div class="select-wrap">
                   <select id="resp_parentesco">
                     <option value="">Selecione</option>
-                    <option>Pai</option>
-                    <option>Mãe</option>
-                    <option>Avô</option>
-                    <option>Avó</option>
-                    <option>Tio</option>
-                    <option>Tia</option>
+                    <option>Pai</option><option>Mãe</option><option>Avô</option>
+                    <option>Avó</option><option>Tio</option><option>Tia</option>
                     <option>Responsável Legal</option>
                   </select>
                 </div>
               </div>
             </div>
-            <div class="field">
-              <label for="resp_celular">Celular do Responsável</label>
-              <div class="phone-wrap">
-                <span class="phone-prefix">+55</span>
-                <input type="tel" id="resp_celular" placeholder="(00) 00000-0000" maxlength="15" inputmode="numeric">
+            <div class="fields col-2">
+              <div class="field">
+                <label for="resp_cpf">CPF do Responsável</label>
+                <input type="text" id="resp_cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric">
+              </div>
+              <div class="field">
+                <label for="resp_celular">Celular do Responsável</label>
+                <div class="phone-wrap">
+                  <span class="phone-prefix">+55</span>
+                  <input type="tel" id="resp_celular" placeholder="(00) 00000-0000" maxlength="15" inputmode="numeric">
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="form-footer">
-          <p class="submit-note">Ao enviar, você concorda que seus dados sejam utilizados exclusivamente para fins de matrícula na Evolution Fitness.</p>
-          <button class="btn-submit" id="btnSubmit" onclick="enviarCadastro()">Finalizar Matrícula no WhatsApp</button>
+        <!-- NAV STEP 1 -->
+        <div class="step-nav">
+          <p class="step-note">Ao prosseguir, você concorda com o uso dos dados para fins de matrícula.</p>
+          <button class="btn-next" onclick="goNext()">Próximo — Par-Q</button>
         </div>
-
       </div>
 
-      <div class="success-wrap" id="successWrap">
-        <div class="success-icon-wrap"><div class="success-check"></div></div>
-        <p class="success-eyebrow">Cadastro Confirmado</p>
-        <h2 class="success-title">Ficha enviada<br>com sucesso</h2>
-        <p class="success-text">Cadastro salvo! Clique abaixo caso o WhatsApp não tenha aberto automaticamente.</p>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
-          <a id="btnWhatsApp" href="#" class="btn-whatsapp" target="_blank">Enviar pelo WhatsApp</a>
-          <button class="btn-novo" onclick="novoCadastro()">Novo Cadastro</button>
+      <!-- ══════════════════════════════════════════ -->
+      <!-- STEP 2 — PAR-Q                            -->
+      <!-- ══════════════════════════════════════════ -->
+      <div id="step2" style="display:none">
+        <div class="form-header">
+          <p class="form-eyebrow">Etapa 2 de 3</p>
+          <h1 class="form-title">Par-Q</h1>
+          <p class="form-desc">Questionário de Prontidão para Atividade Física. Responda com sinceridade todas as perguntas abaixo.</p>
+        </div>
+
+        <div class="form-section">
+          <div class="section-head"><div class="section-num">02</div><div class="section-title">Questionário Par-Q</div></div>
+
+          <!-- Q1 -->
+          <div class="parq-item">
+            <p class="parq-num">Pergunta 01</p>
+            <p class="parq-text">Um médico já lhe disse que você possui algum problema cardíaco e que só deveria realizar atividade física supervisionada por profissional de saúde?</p>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="q1" value="Sim" onchange="onParq(1,'Sim')"> Sim</label>
+              <label class="radio-label"><input type="radio" name="q1" value="Não" onchange="onParq(1,'Não')"> Não</label>
+            </div>
+            <div class="parq-obs" id="parq_obs_1">
+              <div class="field"><label>Observações</label><input type="text" id="parq_obs_text_1" placeholder="Descreva o problema"></div>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="parq-item">
+            <p class="parq-num">Pergunta 02</p>
+            <p class="parq-text">Você sente dores no peito quando pratica atividade física?</p>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="q2" value="Sim" onchange="onParq(2,'Sim')"> Sim</label>
+              <label class="radio-label"><input type="radio" name="q2" value="Não" onchange="onParq(2,'Não')"> Não</label>
+            </div>
+            <div class="parq-obs" id="parq_obs_2">
+              <div class="field"><label>Observações</label><input type="text" id="parq_obs_text_2" placeholder="Descreva as dores"></div>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="parq-item">
+            <p class="parq-num">Pergunta 03</p>
+            <p class="parq-text">No último mês, você sentiu dores no peito sem estar praticando atividade física?</p>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="q3" value="Sim" onchange="onParq(3,'Sim')"> Sim</label>
+              <label class="radio-label"><input type="radio" name="q3" value="Não" onchange="onParq(3,'Não')"> Não</label>
+            </div>
+            <div class="parq-obs" id="parq_obs_3">
+              <div class="field"><label>Observações</label><input type="text" id="parq_obs_text_3" placeholder="Quando e como ocorreu"></div>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="parq-item">
+            <p class="parq-num">Pergunta 04</p>
+            <p class="parq-text">Você perde o equilíbrio em razão de tontura ou já perdeu a consciência alguma vez?</p>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="q4" value="Sim" onchange="onParq(4,'Sim')"> Sim</label>
+              <label class="radio-label"><input type="radio" name="q4" value="Não" onchange="onParq(4,'Não')"> Não</label>
+            </div>
+            <div class="parq-obs" id="parq_obs_4">
+              <div class="field"><label>Observações</label><input type="text" id="parq_obs_text_4" placeholder="Frequência e circunstâncias"></div>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="parq-item">
+            <p class="parq-num">Pergunta 05</p>
+            <p class="parq-text">Você possui algum problema ósseo, muscular ou articular que poderia ser agravado pela prática de atividade física?</p>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="q5" value="Sim" onchange="onParq(5,'Sim')"> Sim</label>
+              <label class="radio-label"><input type="radio" name="q5" value="Não" onchange="onParq(5,'Não')"> Não</label>
+            </div>
+            <div class="parq-obs" id="parq_obs_5">
+              <div class="field"><label>Observações</label><input type="text" id="parq_obs_text_5" placeholder="Qual problema e localização"></div>
+            </div>
+          </div>
+
+          <!-- Q6 -->
+          <div class="parq-item">
+            <p class="parq-num">Pergunta 06</p>
+            <p class="parq-text">Seu médico já lhe prescreveu algum medicamento para pressão arterial ou para o coração?</p>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="q6" value="Sim" onchange="onParq(6,'Sim')"> Sim</label>
+              <label class="radio-label"><input type="radio" name="q6" value="Não" onchange="onParq(6,'Não')"> Não</label>
+            </div>
+            <div class="parq-obs" id="parq_obs_6">
+              <div class="field"><label>Qual medicamento</label><input type="text" id="parq_obs_text_6" placeholder="Nome do medicamento"></div>
+            </div>
+          </div>
+
+          <!-- Q7 -->
+          <div class="parq-item">
+            <p class="parq-num">Pergunta 07</p>
+            <p class="parq-text">Você tem conhecimento de alguma outra razão pela qual não deveria praticar atividade física?</p>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="q7" value="Sim" onchange="onParq(7,'Sim')"> Sim</label>
+              <label class="radio-label"><input type="radio" name="q7" value="Não" onchange="onParq(7,'Não')"> Não</label>
+            </div>
+            <div class="parq-obs" id="parq_obs_7">
+              <div class="field"><label>Observações</label><input type="text" id="parq_obs_text_7" placeholder="Descreva o motivo"></div>
+            </div>
+          </div>
+
+          <!-- DECLARAÇÃO -->
+          <label class="decl-label">
+            <input type="checkbox" id="parq_decl">
+            <span class="decl-text">Li, entendi e respondi honestamente todas as perguntas acima. As informações prestadas são verdadeiras e assumo total responsabilidade por elas. Estou ciente de que, em caso de dúvida, devo consultar um médico antes de iniciar a prática de atividade física.</span>
+          </label>
+        </div>
+
+        <!-- NAV STEP 2 -->
+        <div class="step-nav">
+          <button class="btn-prev" onclick="goPrev()">Anterior</button>
+          <button class="btn-next" onclick="goNext()">Próximo — Anamnese</button>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- STEP 3 — ANAMNESE                         -->
+      <!-- ══════════════════════════════════════════ -->
+      <div id="step3" style="display:none">
+        <div class="form-header">
+          <p class="form-eyebrow">Etapa 3 de 3</p>
+          <h1 class="form-title">Anamnese</h1>
+          <p class="form-desc">Histórico de saúde e hábitos de vida. Estas informações auxiliam os profissionais a personalizar seu treino.</p>
+        </div>
+
+        <div class="form-section">
+          <div class="section-head"><div class="section-num">03</div><div class="section-title">Anamnese</div></div>
+
+          <!-- OBJETIVOS -->
+          <p class="sub-head">Objetivos e Atividade Física</p>
+          <div class="fields">
+            <div class="field">
+              <label for="ana_objetivo">Objetivo Principal *</label>
+              <div class="select-wrap">
+                <select id="ana_objetivo">
+                  <option value="">Selecione o objetivo</option>
+                  <option>Emagrecimento</option>
+                  <option>Hipertrofia / Ganho de massa</option>
+                  <option>Condicionamento físico</option>
+                  <option>Saúde e qualidade de vida</option>
+                  <option>Reabilitação</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label>Pratica atividade física atualmente?</label>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="ana_atividade" value="Sim" onchange="toggleAna('ana_atividade_wrap','Sim',this.value)"> Sim</label>
+                <label class="radio-label"><input type="radio" name="ana_atividade" value="Não" onchange="toggleAna('ana_atividade_wrap','Sim',this.value)"> Não</label>
+              </div>
+            </div>
+            <div id="ana_atividade_wrap" style="display:none">
+              <div class="field">
+                <label for="ana_atividade_desc">Qual atividade e há quanto tempo?</label>
+                <input type="text" id="ana_atividade_desc" placeholder="Ex: Caminhada há 6 meses">
+              </div>
+            </div>
+            <div class="fields col-2">
+              <div class="field">
+                <label for="ana_frequencia">Frequência desejada de treino</label>
+                <div class="select-wrap">
+                  <select id="ana_frequencia">
+                    <option value="">Selecione</option>
+                    <option>2x por semana</option><option>3x por semana</option>
+                    <option>4x por semana</option><option>5x por semana</option><option>6x por semana</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="ana_horario">Horário preferido</label>
+                <div class="select-wrap">
+                  <select id="ana_horario">
+                    <option value="">Selecione</option>
+                    <option>Manhã</option><option>Tarde</option><option>Noite</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SAÚDE -->
+          <p class="sub-head">Histórico de Saúde</p>
+          <div class="fields">
+            <div class="field">
+              <label>Possui lesão ou limitação física?</label>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="ana_lesao" value="Sim" onchange="toggleAna('ana_lesao_wrap','Sim',this.value)"> Sim</label>
+                <label class="radio-label"><input type="radio" name="ana_lesao" value="Não" onchange="toggleAna('ana_lesao_wrap','Sim',this.value)"> Não</label>
+              </div>
+            </div>
+            <div id="ana_lesao_wrap" style="display:none">
+              <div class="field"><label for="ana_lesao_obs">Qual lesão / limitação?</label><input type="text" id="ana_lesao_obs" placeholder="Descreva"></div>
+            </div>
+            <div class="field">
+              <label>Faz uso de medicamentos?</label>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="ana_med" value="Sim" onchange="toggleAna('ana_med_wrap','Sim',this.value)"> Sim</label>
+                <label class="radio-label"><input type="radio" name="ana_med" value="Não" onchange="toggleAna('ana_med_wrap','Sim',this.value)"> Não</label>
+              </div>
+            </div>
+            <div id="ana_med_wrap" style="display:none">
+              <div class="field"><label for="ana_med_obs">Quais medicamentos?</label><input type="text" id="ana_med_obs" placeholder="Nome e dosagem"></div>
+            </div>
+            <div class="fields col-2">
+              <div class="field">
+                <label>Passou por cirurgia nos últimos 6 meses?</label>
+                <div class="radio-group">
+                  <label class="radio-label"><input type="radio" name="ana_cirurgia" value="Sim"> Sim</label>
+                  <label class="radio-label"><input type="radio" name="ana_cirurgia" value="Não"> Não</label>
+                </div>
+              </div>
+              <div class="field">
+                <label>Possui doença diagnosticada?</label>
+                <div class="radio-group">
+                  <label class="radio-label"><input type="radio" name="ana_doenca" value="Sim" onchange="toggleAna('ana_doenca_wrap','Sim',this.value)"> Sim</label>
+                  <label class="radio-label"><input type="radio" name="ana_doenca" value="Não" onchange="toggleAna('ana_doenca_wrap','Sim',this.value)"> Não</label>
+                </div>
+              </div>
+            </div>
+            <div id="ana_doenca_wrap" style="display:none">
+              <div class="field"><label for="ana_doenca_obs">Qual doença?</label><input type="text" id="ana_doenca_obs" placeholder="Ex: Diabetes, Hipertensão"></div>
+            </div>
+          </div>
+
+          <!-- HÁBITOS -->
+          <p class="sub-head">Hábitos de Vida</p>
+          <div class="fields">
+            <div class="fields col-2">
+              <div class="field">
+                <label for="ana_estresse">Nível de estresse atual</label>
+                <div class="select-wrap">
+                  <select id="ana_estresse">
+                    <option value="">Selecione</option>
+                    <option>Baixo</option><option>Médio</option><option>Alto</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="ana_sono">Qualidade do sono</label>
+                <div class="select-wrap">
+                  <select id="ana_sono">
+                    <option value="">Selecione</option>
+                    <option>Boa</option><option>Regular</option><option>Ruim</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label for="ana_alimentacao">Hábitos alimentares</label>
+              <div class="select-wrap">
+                <select id="ana_alimentacao">
+                  <option value="">Selecione</option>
+                  <option>Saudável</option><option>Regular</option><option>Preciso melhorar</option>
+                </select>
+              </div>
+            </div>
+            <div class="fields col-2">
+              <div class="field">
+                <label>Consome bebidas alcoólicas?</label>
+                <div class="radio-group">
+                  <label class="radio-label"><input type="radio" name="ana_alcool" value="Sim"> Sim</label>
+                  <label class="radio-label"><input type="radio" name="ana_alcool" value="Não"> Não</label>
+                </div>
+              </div>
+              <div class="field">
+                <label>É fumante?</label>
+                <div class="radio-group">
+                  <label class="radio-label"><input type="radio" name="ana_fumante" value="Sim"> Sim</label>
+                  <label class="radio-label"><input type="radio" name="ana_fumante" value="Não"> Não</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- OBSERVAÇÕES -->
+          <p class="sub-head">Observações Gerais</p>
+          <div class="fields">
+            <div class="field">
+              <label for="ana_obs">Observações adicionais</label>
+              <textarea id="ana_obs" placeholder="Informe qualquer outra informação relevante para o seu treino..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- NAV STEP 3 -->
+        <div class="step-nav">
+          <button class="btn-prev" onclick="goPrev()">Anterior</button>
+          <button class="btn-next" id="btnFinalizar" onclick="finalizar()">Concluir e Enviar</button>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════ -->
+      <!-- STEP 4 — CONCLUÍDO                        -->
+      <!-- ══════════════════════════════════════════ -->
+      <div id="step4" style="display:none">
+        <div class="success-wrap">
+          <div class="success-icon-wrap"><div class="success-check"></div></div>
+          <p class="success-eyebrow">Cadastro Concluído</p>
+          <h2 class="success-title">Ficha completa<br>com sucesso</h2>
+          <p class="success-text">Cadastro, Par-Q e Anamnese registrados. Clique abaixo para enviar tudo para a equipe da Evolution Fitness via WhatsApp.</p>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <a id="btnWhatsApp" href="#" class="btn-whatsapp" target="_blank">Enviar pelo WhatsApp</a>
+            <button class="btn-novo" onclick="reiniciar()">Novo Cadastro</button>
+          </div>
         </div>
       </div>
 
@@ -288,46 +660,145 @@
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4aG9wb3dpb3d1amVic2N2cmt3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NzYyMTAsImV4cCI6MjA4OTQ1MjIxMH0.mWlXrr5TYzFo3S8mCJw4cps-IVz9CdHpyfD-O7A5-us'
   );
 
-  // Mostrar/ocultar seção responsável
-  window.toggleResponsavel = function(cb) {
-    document.getElementById('secaoResponsavel').style.display = cb.checked ? 'block' : 'none';
-  };
+  // ── ESTADO ──────────────────────────────────────
+  let currentStep = 1;
 
-  // Máscaras
-  function maskCPF(el) {
-    el.addEventListener('input', e => {
+  // ── PROGRESSO ───────────────────────────────────
+  function updateProgress() {
+    for (let i = 1; i <= 4; i++) {
+      const dot = document.getElementById(`sd${i}`);
+      const lbl = document.getElementById(`sl${i}`);
+      const conn = document.getElementById(`sc${i}`);
+      if (i < currentStep) {
+        dot.className = 'step-dot done'; dot.textContent = '✓';
+        lbl.className = 'step-lbl done';
+        if (conn) conn.className = 'step-conn done';
+      } else if (i === currentStep) {
+        dot.className = 'step-dot active'; dot.textContent = `0${i}`;
+        lbl.className = 'step-lbl active';
+        if (conn) conn.className = 'step-conn';
+      } else {
+        dot.className = 'step-dot'; dot.textContent = `0${i}`;
+        lbl.className = 'step-lbl';
+        if (conn) conn.className = 'step-conn';
+      }
+    }
+  }
+
+  function showStep(n) {
+    for (let i = 1; i <= 4; i++)
+      document.getElementById(`step${i}`).style.display = i === n ? 'block' : 'none';
+    document.getElementById('stepsBar').style.display = n === 4 ? 'none' : 'flex';
+    currentStep = n;
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── EXPOSIÇÃO GLOBAL ─────────────────────────────
+  window.goNext = goNext;
+  window.goPrev = goPrev;
+  window.finalizar = finalizar;
+  window.reiniciar = reiniciar;
+  window.toggleResponsavel = toggleResponsavel;
+  window.onParq = onParq;
+  window.toggleAna = toggleAna;
+
+  // ── MÁSCARAS ─────────────────────────────────────
+  function maskCPF(id) {
+    document.getElementById(id).addEventListener('input', e => {
       let v = e.target.value.replace(/\D/g,'').slice(0,11);
       v = v.replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d)/,'$1.$2').replace(/(\d{3})(\d{1,2})$/,'$1-$2');
       e.target.value = v;
     });
   }
-  function maskPhone(el) {
-    el.addEventListener('input', e => {
+  function maskPhone(id) {
+    document.getElementById(id).addEventListener('input', e => {
       let v = e.target.value.replace(/\D/g,'').slice(0,11);
       if(v.length>=7) v=v.replace(/(\d{2})(\d{5})(\d{0,4})/,'($1) $2-$3');
       else if(v.length>=3) v=v.replace(/(\d{2})(\d{0,5})/,'($1) $2');
       e.target.value = v;
     });
   }
-
-  maskCPF(document.getElementById('cpf'));
-  maskCPF(document.getElementById('resp_cpf'));
-  maskPhone(document.getElementById('whatsapp'));
-  maskPhone(document.getElementById('resp_celular'));
-
+  maskCPF('cpf'); maskCPF('resp_cpf');
+  maskPhone('whatsapp'); maskPhone('resp_celular');
   document.getElementById('cep').addEventListener('input', e => {
     let v = e.target.value.replace(/\D/g,'').slice(0,8);
     e.target.value = v.replace(/(\d{5})(\d)/,'$1-$2');
   });
 
+  // ── TOGGLE RESPONSÁVEL ───────────────────────────
+  function toggleResponsavel(cb) {
+    document.getElementById('secaoResponsavel').style.display = cb.checked ? 'block' : 'none';
+  }
+
+  // ── PAR-Q LÓGICA ─────────────────────────────────
+  function onParq(n, val) {
+    const obs = document.getElementById(`parq_obs_${n}`);
+    obs.className = val === 'Sim' ? 'parq-obs show' : 'parq-obs';
+  }
+
+  // ── ANAMNESE LÓGICA ──────────────────────────────
+  function toggleAna(wrapId, triggerVal, currentVal) {
+    document.getElementById(wrapId).style.display = currentVal === triggerVal ? 'block' : 'none';
+  }
+
+  // ── VALIDAÇÕES ───────────────────────────────────
+  function validateStep1() {
+    const nome = document.getElementById('nome').value.trim();
+    const cpf  = document.getElementById('cpf').value.replace(/\D/g,'');
+    const nasc = document.getElementById('nascimento').value;
+    const wpp  = document.getElementById('whatsapp').value.replace(/\D/g,'');
+    if (nome.split(' ').length < 2) { alert('Informe o nome completo.'); return false; }
+    if (cpf.length < 11) { alert('Informe o CPF corretamente.'); return false; }
+    if (!nasc) { alert('Informe a data de nascimento.'); return false; }
+    if (wpp.length < 10) { alert('Informe o WhatsApp corretamente.'); return false; }
+    return true;
+  }
+
+  function validateStep2() {
+    for (let i = 1; i <= 7; i++) {
+      if (!document.querySelector(`input[name="q${i}"]:checked`)) {
+        alert(`Responda a Pergunta ${String(i).padStart(2,'0')} do PAR-Q.`); return false;
+      }
+    }
+    if (!document.getElementById('parq_decl').checked) {
+      alert('Você deve assinar a declaração para prosseguir.'); return false;
+    }
+    return true;
+  }
+
+  function validateStep3() {
+    if (!document.getElementById('ana_objetivo').value) {
+      alert('Informe o objetivo principal.'); return false;
+    }
+    return true;
+  }
+
+  // ── NAVEGAÇÃO ────────────────────────────────────
+  function goNext() {
+    if (currentStep === 1 && validateStep1()) showStep(2);
+    else if (currentStep === 2 && validateStep2()) showStep(3);
+  }
+
+  function goPrev() {
+    if (currentStep > 1) showStep(currentStep - 1);
+  }
+
+  // ── TOAST ────────────────────────────────────────
   function showToast(msg) {
     const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
+    t.textContent = msg; t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 3500);
   }
 
-  window.enviarCadastro = async function() {
+  // ── FINALIZAR ────────────────────────────────────
+  async function finalizar() {
+    if (!validateStep3()) return;
+
+    const btn = document.getElementById('btnFinalizar');
+    btn.disabled = true; btn.textContent = 'Salvando...';
+
+    // Coleta Cadastro
     const nome      = document.getElementById('nome').value.trim();
     const cpf       = document.getElementById('cpf').value.trim();
     const nasc      = document.getElementById('nascimento').value;
@@ -339,104 +810,151 @@
     const cidade    = document.getElementById('cidade').value.trim();
     const estado    = document.getElementById('estado').value;
     const cep       = document.getElementById('cep').value.trim();
-    const plano     = Array.from(document.querySelectorAll('.checkboxes input:checked'))
-                       .map(cb => cb.value).join(', ') || 'Nao informado';
-    const ehMenor     = document.getElementById('ehMenor').checked;
+    const plano     = Array.from(document.querySelectorAll('.checkboxes input:checked')).map(cb => cb.value).join(', ') || 'Não informado';
+    const ehMenor   = document.getElementById('ehMenor').checked;
     const resp_nome   = document.getElementById('resp_nome').value.trim();
+    const resp_idade  = document.getElementById('resp_idade').value.trim();
     const resp_cpf    = document.getElementById('resp_cpf').value.trim();
     const resp_cel    = document.getElementById('resp_celular').value.trim();
     const resp_parent = document.getElementById('resp_parentesco').value;
 
-    if (!nome || !cpf || !nasc || !wpp) {
-      alert('Preencha todos os campos obrigatórios!');
-      return;
-    }
-
-    const btn = document.getElementById('btnSubmit');
-    btn.disabled = true;
-    btn.textContent = 'Salvando...';
-
     const [y, m, d] = nasc.split('-');
     const nascFmt = `${d}/${m}/${y}`;
 
-    // SALVAR NO SUPABASE
-    const { error } = await sb.from('alunos').insert([{
-      nome, cpf, nascimento: nascFmt, whatsapp: wpp,
-      email: email || null, instagram: instagram || null,
-      rua, bairro, cidade, estado, cep, plano,
-      menor_de_idade: ehMenor,
-      resp_nome: ehMenor ? resp_nome || null : null,
-      resp_cpf: ehMenor ? resp_cpf || null : null,
-      resp_celular: ehMenor ? resp_cel || null : null,
-      resp_parentesco: ehMenor ? resp_parent || null : null
-    }]);
+    // Coleta PAR-Q
+    const parqLabels = [
+      'Problema cardíaco supervisionado?',
+      'Dor no peito durante atividade?',
+      'Dor no peito em repouso (último mês)?',
+      'Tontura ou perda de consciência?',
+      'Problema ósseo/muscular/articular?',
+      'Medicamento para pressão ou coração?',
+      'Outra razão para não praticar?'
+    ];
+    const parqData = {};
+    for (let i = 1; i <= 7; i++) {
+      const r = document.querySelector(`input[name="q${i}"]:checked`);
+      parqData[`q${i}`] = r ? r.value : '';
+      const obs = document.getElementById(`parq_obs_text_${i}`);
+      parqData[`q${i}_obs`] = obs ? obs.value.trim() : '';
+    }
+    parqData.declaracao = true;
 
-    if (error) {
-      console.error('Erro Supabase:', error);
-      showToast('Aviso: erro ao salvar no banco.');
+    // Coleta Anamnese
+    const anaData = {
+      objetivo:        document.getElementById('ana_objetivo').value,
+      atividade_atual: document.querySelector('input[name="ana_atividade"]:checked')?.value || '',
+      atividade_desc:  document.getElementById('ana_atividade_desc').value.trim(),
+      frequencia:      document.getElementById('ana_frequencia').value,
+      horario:         document.getElementById('ana_horario').value,
+      lesao:           document.querySelector('input[name="ana_lesao"]:checked')?.value || '',
+      lesao_obs:       document.getElementById('ana_lesao_obs').value.trim(),
+      medicamento:     document.querySelector('input[name="ana_med"]:checked')?.value || '',
+      medicamento_obs: document.getElementById('ana_med_obs').value.trim(),
+      cirurgia:        document.querySelector('input[name="ana_cirurgia"]:checked')?.value || '',
+      doenca:          document.querySelector('input[name="ana_doenca"]:checked')?.value || '',
+      doenca_obs:      document.getElementById('ana_doenca_obs').value.trim(),
+      estresse:        document.getElementById('ana_estresse').value,
+      sono:            document.getElementById('ana_sono').value,
+      alimentacao:     document.getElementById('ana_alimentacao').value,
+      alcool:          document.querySelector('input[name="ana_alcool"]:checked')?.value || '',
+      fumante:         document.querySelector('input[name="ana_fumante"]:checked')?.value || '',
+      obs:             document.getElementById('ana_obs').value.trim()
+    };
+
+    // Supabase
+    try {
+      const { error } = await sb.from('alunos').insert([{
+        nome, cpf, nascimento: nascFmt, whatsapp: wpp,
+        email: email||null, instagram: instagram||null,
+        rua, bairro, cidade, estado, cep, plano,
+        menor_de_idade: ehMenor,
+        resp_nome:      ehMenor ? resp_nome||null  : null,
+        resp_idade:     ehMenor ? resp_idade||null : null,
+        resp_cpf:       ehMenor ? resp_cpf||null   : null,
+        resp_celular:   ehMenor ? resp_cel||null   : null,
+        resp_parentesco:ehMenor ? resp_parent||null: null,
+        parq:      JSON.stringify(parqData),
+        anamnese:  JSON.stringify(anaData)
+      }]);
+      if (error) { console.error('Supabase:', error); showToast('Aviso: erro ao salvar no banco.'); }
+    } catch(e) { console.error(e); }
+
+    // Bloco responsável
+    const blocoResp = ehMenor ? `\n--- RESPONSÁVEL ---\nNome: ${resp_nome||'-'}\nIdade: ${resp_idade||'-'}\nCPF: ${resp_cpf||'-'}\nCelular: ${resp_cel||'-'}\nParentesco: ${resp_parent||'-'}` : '';
+
+    // Bloco PAR-Q
+    let blocoParq = '';
+    for (let i = 1; i <= 7; i++) {
+      blocoParq += `${i}. ${parqLabels[i-1]}\n   → ${parqData[`q${i}`]||'-'}`;
+      if (parqData[`q${i}`]==='Sim' && parqData[`q${i}_obs`]) blocoParq += `\n   Obs: ${parqData[`q${i}_obs`]}`;
+      blocoParq += '\n';
     }
 
-    // MONTAR MENSAGEM WHATSAPP
-    const responsavelInfo = ehMenor ? `
-
-——————————————————————
-RESPONSAVEL
-——————————————————————
-Nome: ${resp_nome || 'Nao informado'}
-CPF: ${resp_cpf || 'Nao informado'}
-Celular: ${resp_cel || 'Nao informado'}
-Parentesco: ${resp_parent || 'Nao informado'}` : '';
-
+    // Mensagem WhatsApp completa
     const msg =
-`EVOLUTION FITNESS — FICHA DE MATRICULA
+`EVOLUTION FITNESS — FICHA COMPLETA
 
-——————————————————————
-DADOS PESSOAIS
-——————————————————————
+══════════════════════════
+BLOCO 1 — CADASTRO
+══════════════════════════
 Nome: ${nome}
 CPF: ${cpf}
 Nascimento: ${nascFmt}
 WhatsApp: ${wpp}
-E-mail: ${email || 'Nao informado'}
-Instagram: ${instagram || 'Nao informado'}
-
-——————————————————————
-ENDERECO
-——————————————————————
+E-mail: ${email||'-'}
+Instagram: ${instagram||'-'}
 Rua: ${rua}
 Bairro: ${bairro}
 Cidade: ${cidade} / ${estado}
 CEP: ${cep}
+Plano: ${plano}${blocoResp}
 
-——————————————————————
-PLANO ESCOLHIDO
-——————————————————————
-${plano}${responsavelInfo}
-——————————————————————
-Cadastro realizado pelo formulario digital.`;
+══════════════════════════
+BLOCO 2 — PAR-Q
+══════════════════════════
+${blocoParq}Declaração: ASSINADA
+
+══════════════════════════
+BLOCO 3 — ANAMNESE
+══════════════════════════
+Objetivo: ${anaData.objetivo||'-'}
+Atividade atual: ${anaData.atividade_atual||'-'}${anaData.atividade_desc ? ` (${anaData.atividade_desc})` : ''}
+Frequência desejada: ${anaData.frequencia||'-'}
+Horário preferido: ${anaData.horario||'-'}
+Lesão/Limitação: ${anaData.lesao||'-'}${anaData.lesao_obs ? ` — ${anaData.lesao_obs}` : ''}
+Medicamentos: ${anaData.medicamento||'-'}${anaData.medicamento_obs ? ` — ${anaData.medicamento_obs}` : ''}
+Cirurgia recente: ${anaData.cirurgia||'-'}
+Doença diagnosticada: ${anaData.doenca||'-'}${anaData.doenca_obs ? ` — ${anaData.doenca_obs}` : ''}
+Estresse: ${anaData.estresse||'-'}
+Sono: ${anaData.sono||'-'}
+Alimentação: ${anaData.alimentacao||'-'}
+Álcool: ${anaData.alcool||'-'}
+Fumante: ${anaData.fumante||'-'}${anaData.obs ? `\nObs: ${anaData.obs}` : ''}`;
 
     const waUrl = `https://wa.me/5524981433386?text=${encodeURIComponent(msg)}`;
-
-    document.getElementById('formMain').style.display = 'none';
-    document.getElementById('successWrap').classList.add('show');
     document.getElementById('btnWhatsApp').href = waUrl;
 
-    btn.disabled = false;
-    btn.textContent = 'Finalizar Matrícula no WhatsApp';
-
+    showStep(4);
     window.open(waUrl, '_blank');
-  };
 
-  window.novoCadastro = function() {
-    document.getElementById('formMain').style.display = '';
-    document.getElementById('successWrap').classList.remove('show');
-    document.querySelectorAll('input[type="text"],input[type="tel"],input[type="email"],input[type="date"]').forEach(i => i.value = '');
-    document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
-    document.getElementById('estado').value = '';
-    document.getElementById('resp_parentesco').value = '';
+    btn.disabled = false;
+    btn.textContent = 'Concluir e Enviar';
+  }
+
+  // ── REINICIAR ────────────────────────────────────
+  function reiniciar() {
+    document.querySelectorAll('input[type="text"],input[type="tel"],input[type="email"],input[type="date"],input[type="number"],textarea').forEach(el => el.value = '');
+    document.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach(el => el.checked = false);
+    document.querySelectorAll('select').forEach(el => el.value = '');
     document.getElementById('secaoResponsavel').style.display = 'none';
-    window.scrollTo({top:0,behavior:'smooth'});
-  };
+    document.querySelectorAll('.parq-obs').forEach(el => el.className = 'parq-obs');
+    document.getElementById('ana_atividade_wrap').style.display = 'none';
+    document.getElementById('ana_lesao_wrap').style.display = 'none';
+    document.getElementById('ana_med_wrap').style.display = 'none';
+    document.getElementById('ana_doenca_wrap').style.display = 'none';
+    showStep(1);
+  }
 </script>
 </body>
 </html>
